@@ -1,20 +1,18 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'golang:1.23'
+            args '-v /go/pkg/mod:/go/pkg/mod' // optional: cache
+        }
+    }
 
     stages {
-        stage('Clone') {
-            steps {
-                echo 'Cloning repository...'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'go mod tidy'
                 sh 'go build -v ./...'
             }
         }
-
         stage('Test') {
             steps {
                 sh 'go test ./...'

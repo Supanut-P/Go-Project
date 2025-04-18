@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'golang:1.23'
-            args '-v /go/pkg/mod:/go/pkg/mod' // optional: cache
+            args '-v /go/pkg/mod:/go/pkg/mod'
         }
     }
 
